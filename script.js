@@ -87,4 +87,36 @@ document.addEventListener('DOMContentLoaded', () => {
             heroGlow.style.transform = `translate(${-50 + moveX}% , ${-50 + moveY}%)`;
         }
     });
+
+    // Bio expansion logic
+    const bioToggle = document.getElementById('bio-toggle');
+    const authorBio = document.getElementById('author-bio');
+
+    if (bioToggle && authorBio) {
+        bioToggle.addEventListener('click', () => {
+            const isCollapsed = authorBio.classList.contains('bio-collapsed');
+            authorBio.classList.toggle('bio-collapsed');
+            authorBio.classList.toggle('bio-expanded');
+
+            const toggleText = bioToggle.querySelector('span:not(.dots)');
+
+            if (isCollapsed) {
+                // Expanding
+                toggleText.setAttribute('data-en', 'Read less');
+                toggleText.setAttribute('data-es', 'Leer menos');
+
+                // Smoothly scroll to center the toggle point so the reader follows the text
+                setTimeout(() => {
+                    bioToggle.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 50);
+            } else {
+                // Collapsing
+                toggleText.setAttribute('data-en', 'Read more');
+                toggleText.setAttribute('data-es', 'Leer más');
+            }
+
+            // Immediately update current text based on current language
+            toggleText.textContent = toggleText.getAttribute(`data-${currentLang}`);
+        });
+    }
 });

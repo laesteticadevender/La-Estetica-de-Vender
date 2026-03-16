@@ -531,6 +531,65 @@ section {
     font-size: 1.1rem;
 }
 
+/* Bio Expandable Paragraph */
+.author-text {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+#author-bio {
+    transition: max-height 1.2s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother, standard ease-in-out variant */
+    overflow: hidden;
+    position: relative;
+}
+
+#author-bio.bio-collapsed {
+    max-height: 125px; /* ~4 lines depending on line-height */
+}
+
+#author-bio.bio-expanded {
+    max-height: 2000px;
+}
+
+.bio-toggle-container {
+    position: relative;
+    margin-top: -35px; /* Move it closer to the text */
+    z-index: 10;
+}
+
+.bio-fade {
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, var(--bg-dark));
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+    margin-bottom: 2px;
+}
+
+#author-bio.bio-expanded + .bio-toggle-container .bio-fade {
+    opacity: 0;
+}
+
+#author-bio.bio-expanded + .bio-toggle-container {
+    margin-top: 10px;
+}
+
+.bio-link {
+    color: var(--accent-gold);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: var(--transition-smooth);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.bio-link:hover {
+    color: var(--accent-gold-bright);
+}
+
 /* Testimonials */
 .testimonials {
     background: var(--bg-darker);
